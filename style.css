@@ -1,0 +1,289 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #0f172a;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #f9fafb;
+    overflow: hidden;
+    position: relative;
+}
+
+.gradient-flow {
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease-in-out infinite;
+}
+
+/* Different palettes per sub-page for more abstraction */
+.gradient-flow.page-one {
+    background: linear-gradient(-45deg,
+        #0f172a,
+        #1e293b,
+        #0ea5e9,
+        #22d3ee);
+}
+
+.gradient-flow.page-two {
+    background: linear-gradient(-45deg,
+        #111827,
+        #7c2d12,
+        #f97316,
+        #fecaca);
+}
+
+.gradient-flow.page-three {
+    background: linear-gradient(-45deg,
+        #020617,
+        #312e81,
+        #6366f1,
+        #a855f7);
+}
+
+.gradient-flow.page-four {
+    background: linear-gradient(-45deg,
+        #022c22,
+        #16a34a,
+        #a3e635,
+        #facc15);
+}
+
+/* Fallback / index page */
+.gradient-flow:not(.page-one):not(.page-two):not(.page-three):not(.page-four) {
+    background: linear-gradient(-45deg,
+        #111827,
+        #0f766e,
+        #0369a1,
+        #4f46e5);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 0%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Abstract color blocks */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 220px;
+    height: 220px;
+    border-radius: 32px;
+    opacity: 0.35;
+    filter: blur(2px);
+    mix-blend-mode: screen;
+    z-index: 0;
+}
+
+body::before {
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    top: -40px;
+    left: -60px;
+    animation: floatOne 18s ease-in-out infinite alternate;
+}
+
+body::after {
+    background: linear-gradient(135deg, #22c55e, #0ea5e9);
+    bottom: -60px;
+    right: -40px;
+    animation: floatTwo 22s ease-in-out infinite alternate;
+}
+
+#container::before,
+#container::after {
+    content: "";
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 24px;
+    opacity: 0.45;
+    mix-blend-mode: screen;
+    z-index: 0;
+}
+
+#container::before {
+    background: linear-gradient(135deg, brown, lime);
+    top: 10%;
+    right: 18%;
+    animation: floatThree 26s ease-in-out infinite alternate;
+}
+
+#container::after {
+    background: linear-gradient(135deg, violet, darkviolet);
+    bottom: 12%;
+    left: 12%;
+    animation: floatFour 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatOne {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(80px, 40px) rotate(8deg); }
+    100% { transform: translate(30px, 120px) rotate(-6deg); }
+}
+
+@keyframes floatTwo {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-60px, -40px) rotate(-10deg); }
+    100% { transform: translate(-20px, -120px) rotate(5deg); }
+}
+
+@keyframes floatThree {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-60px, 40px) rotate(12deg); }
+}
+
+@keyframes floatFour {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(40px, -40px) rotate(-12deg); }
+}
+
+#container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 24px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+.link {
+    text-decoration: none;
+    color: #020617;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 10px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(248, 250, 252, 0.9);
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.55),
+        0 0 0 1px rgba(148, 163, 184, 0.5);
+    backdrop-filter: blur(10px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease,
+        background 0.25s ease, color 0.25s ease;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.link:hover {
+    transform: translateY(-2px) scale(1.03);
+    background: #020617;
+    color: #e5e7eb;
+    box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.8),
+        0 0 0 1px rgba(148, 163, 184, 0.7);
+}
+
+/* Typography for inner pages */
+h1 {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    text-shadow:
+        0 0 18px rgba(15, 23, 42, 0.8),
+        0 0 40px rgba(37, 99, 235, 0.6);
+}
+
+p {
+    font-size: 1.05rem;
+    max-width: 38rem;
+    line-height: 1.7;
+    margin: 0.3rem auto;
+    text-align: center;
+    color: darkblue;
+}
+
+a[href="../index.html"] {
+    display: inline-block;
+    margin-top: 1.4rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.75);
+    color: #e5e7eb;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(148, 163, 184, 0.8);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a[href="../index.html"]:hover {
+    background: #e5e7eb;
+    color: #020617;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.6);
+}
+
+button {
+    margin-top: 1.2rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    border: none;
+    background: rgba(248, 250, 252, 0.95);
+    color: #020617;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow:
+        0 16px 40px rgba(15, 23, 42, 0.7),
+        0 0 0 1px rgba(148, 163, 184, 0.7);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+        color 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+button:hover {
+    transform: translateY(-1px) scale(1.02);
+    background: #020617;
+    color: #e5e7eb;
+}
+
+/* Button click pulse */
+.btn-pulse {
+    transform: translateY(-1px) scale(0.97);
+    box-shadow:
+        0 10px 22px rgba(15, 23, 42, 0.6),
+        0 0 0 1px rgba(148, 163, 184, 0.9);
+}
+
+.page-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem 1.5rem;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
